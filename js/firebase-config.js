@@ -348,6 +348,91 @@ function formatDate(timestamp) {
     });
 }
 
+
+// ===================================
+// User Management Helpers (Admin)
+// ===================================
+
+// Get all users (for admin)
+async function getAllUsers() {
+    try {
+        const snapshot = await db.collection('users').get();
+        const users = [];
+        snapshot.forEach(doc => {
+            users.push({ id: doc.id, ...doc.data() });
+        });
+        return { success: true, data: users };
+    } catch (error) {
+        return { success: false, error: error.message };
+    }
+}
+
+// Get users by role
+async function getUsersByRole(role) {
+    try {
+        const snapshot = await db.collection('users').where('role', '==', role).get();
+        const users = [];
+        snapshot.forEach(doc => {
+            users.push({ id: doc.id, ...doc.data() });
+        });
+        return { success: true, data: users };
+    } catch (error) {
+        return { success: false, error: error.message };
+    }
+}
+
+// Add user (for creating trainers/clients by admin)
+async function addUser(userData) {
+    try {
+        const docRef = await db.collection('users').add({
+            ...userData,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            createdBy: auth.currentUser ? auth.currentUser.uid : null,
+            status: 'active'
+        });
+        return { success: true, id: docRef.id };
+    } catch (error) {
+        return { success: false, error: error.message };
+    }
+}
+
+// Update workout
+async function updateWorkout(workoutId, updates) {
+    try {
+        await db.collection('workouts').doc(workoutId).update({
+            ...updates,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        return { success: true };
+    } catch (error) {
+        return { success: false, error: error.message };
+    }
+}
+
+// Delete workout
+async function deleteWorkout(workoutId) {
+    try {
+        await db.collection('workouts').doc(workoutId).delete();
+        return { success: true };
+    } catch (error) {
+        return { success: false, error: error.message };
+    }
+}
+
+// Get single workout by ID
+async function getWorkout(workoutId) {
+    try {
+        const doc = await db.collection('workouts').doc(workoutId).get();
+        if (doc.exists) {
+            return { success: true, data: { id: doc.id, ...doc.data() } };
+        } else {
+            return { success: false, error: 'Workout not found' };
+        }
+    } catch (error) {
+        return { success: false, error: error.message };
+    }
+}
+
 // Export for use in other files
 window.FirebaseHelper = {
     initializeFirebase,
@@ -362,6 +447,9 @@ window.FirebaseHelper = {
     updateClient,
     getAllWorkouts,
     addWorkout,
+    updateWorkout,
+    deleteWorkout,
+    getWorkout,
     assignWorkout,
     getClientAssignments,
     completeAssignment,
@@ -369,5 +457,9 @@ window.FirebaseHelper = {
     getMessages,
     listenToMessages,
     markMessagesAsRead,
-    formatDate
+    formatDate,
+    getAllUsers,
+    getUsersByRole,
+    addUser
 };
+

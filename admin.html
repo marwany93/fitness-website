@@ -236,6 +236,70 @@
                 display: none;
             }
         }
+
+        /* Workout Library Styles */
+        .workout-card {
+            background: white;
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            border-left: 4px solid var(--secondary-green);
+        }
+
+        .workout-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .workout-difficulty {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .difficulty-beginner {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .difficulty-intermediate {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .difficulty-advanced {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* Exercise Fields Styles */
+        .exercise-field {
+            margin-bottom: var(--space-md);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+        }
+
+        .btn-icon {
+            background: transparent;
+            border: none;
+            color: var(--error);
+            cursor: pointer;
+            font-size: 1.25rem;
+            padding: var(--space-xs);
+        }
+
+        .btn-icon:hover {
+            color: var(--error-dark);
+        }
     </style>
 </head>
 
@@ -327,10 +391,75 @@
 
             <!-- Workouts View -->
             <div id="workoutsView" style="display: none;">
-                <h1>مكتبة التمارين / Workout Library</h1>
-                <p>قريباً... / Coming soon...</p>
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-lg);">
+                    <h1>مكتبة التمارين / Workout Library</h1>
+                    <button class="btn btn-primary" id="createWorkoutBtn" style="display: none;">
+                        <i class="fas fa-plus"></i> إنشاء تمرين / Create Workout
+                    </button>
+                </div>
+
+                <div id="workoutsGrid" class="clients-grid">
+                    <!-- Workouts will be loaded here -->
+                </div>
             </div>
         </main>
+    </div>
+
+    <!-- Create Workout Modal -->
+    <div id="createWorkoutModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>إنشاء تمرين جديد / Create New Workout</h2>
+                <button class="close-modal" onclick="closeCreateWorkoutModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="createWorkoutForm">
+                    <div class="form-group">
+                        <label class="form-label">العنوان بالعربي / Arabic Title</label>
+                        <input type="text" id="workoutTitleAr" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">English Title</label>
+                        <input type="text" id="workoutTitleEn" class="form-input" required>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);">
+                        <div class="form-group">
+                            <label class="form-label">المستوى / Difficulty</label>
+                            <select id="workoutDifficulty" class="form-select">
+                                <option value="beginner">Beginner - مبتدئ</option>
+                                <option value="intermediate">Intermediate - متوسط</option>
+                                <option value="advanced">Advanced - متقدم</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">المدة (دقائق) / Duration (min)</label>
+                            <input type="number" id="workoutDuration" class="form-input" required min="5"
+                                placeholder="30">
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: var(--space-lg); margin-bottom: var(--space-md);">التمارين / Exercises</h3>
+                    <div id="exercisesContainer">
+                        <!-- Exercises will be added dynamically -->
+                    </div>
+
+                    <button type="button" class="btn btn-secondary" onclick="addExerciseField()"
+                        style="margin-bottom: var(--space-lg);">
+                        <i class="fas fa-plus"></i> إضافة تمرين / Add Exercise
+                    </button>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-save"></i> حفظ التمرين / Save Workout
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
 
     <!-- Client Detail Modal -->
