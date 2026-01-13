@@ -2,15 +2,14 @@
 // Firebase Configuration & Initialization
 // ===================================
 
-// NOTE: Replace these with your actual Firebase project credentials
-// Get them from: Firebase Console > Project Settings > Your apps > Web app
+// Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY_HERE",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyClpHr1Y_lKeAmb3Dfq2dXbZCYDbvNXPLk",
+    authDomain: "fitlife-e5421.firebaseapp.com",
+    projectId: "fitlife-e5421",
+    storageBucket: "fitlife-e5421.firebasestorage.app",
+    messagingSenderId: "81268099270",
+    appId: "1:81268099270:web:f0a521d8dc42c9ec15afc7"
 };
 
 // Initialize Firebase (will be done when SDK is loaded)
