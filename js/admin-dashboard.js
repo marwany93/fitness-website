@@ -507,6 +507,10 @@ function displayClientInfo(client) {
         <strong>تاريخ الانضمام / Joined:</strong>
         <p>${FirebaseHelper.formatDate(client.createdAt)}</p>
       </div>
+      
+      <button class="btn btn-primary" onclick="openEditClientModal('${client.id}')" style="margin-top: var(--space-lg); width: 100%;">
+        <i class="fas fa-edit"></i> تعديل البيانات / Edit Info
+      </button>
     </div>
   `;
 }
@@ -574,6 +578,11 @@ function createWorkoutCard(workout) {
                 &nbsp;&nbsp;|&nbsp;&nbsp;
                 <i class="fas fa-clock"></i> ${workout.duration || 30} دقيقة / min
             </p>
+            ${currentUserRole === 'admin' ? `
+                <button class="btn btn-secondary" onclick="openEditWorkoutModal('${workout.id}')" style="margin-top: var(--space-md); width: 100%; font-size: 0.875rem;">
+                    <i class="fas fa-edit"></i> تعديل / Edit
+                </button>
+            ` : ''}
         </div>
     `;
 
@@ -760,4 +769,47 @@ showDashboard = async function () {
     // Load workouts in workout library
     loadWorkouts();
 };
+
+// ===================================
+// View Switching
+// ===================================
+
+function switchView(viewName) {
+    // Hide all views
+    document.getElementById('clientsView').style.display = 'none';
+    document.getElementById('workoutsView').style.display = 'none';
+    if (document.getElementById('trainersView')) {
+        document.getElementById('trainersView').style.display = 'none';
+    }
+
+    // Show selected view
+    if (viewName === 'clients') {
+        document.getElementById('clientsView').style.display = 'block';
+    } else if (viewName === 'workouts') {
+        document.getElementById('workoutsView').style.display = 'block';
+    } else if (viewName === 'trainers' && document.getElementById('trainersView')) {
+        document.getElementById('trainersView').style.display = 'block';
+    }
+}
+
+// Tab switching for client modal
+function switchTab(tabName) {
+    // Update active tab button
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+        btn.style.borderBottom = '3px solid transparent';
+        btn.style.color = 'var(--gray-600)';
+
+        if (btn.dataset.tab === tabName) {
+            btn.classList.add('active');
+            btn.style.borderBottom = '3px solid var(--primary-blue)';
+            btn.style.color = 'var(--primary-blue)';
+        }
+    });
+
+    // Show/hide tab content
+    document.getElementById('messagesTab').style.display = tabName === 'messages' ? 'block' : 'none';
+    document.getElementById('workoutsTab').style.display = tabName === 'workouts' ? 'block' : 'none';
+    document.getElementById('infoTab').style.display = tabName === 'info' ? 'block' : 'none';
+}
 

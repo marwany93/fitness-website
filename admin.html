@@ -363,6 +363,12 @@
                         <span>التمارين / Workouts</span>
                     </a>
                 </li>
+                <li id="trainersMenuItem" style="display: none;">
+                    <a href="#" data-view="trainers">
+                        <i class="fas fa-user-tie"></i>
+                        <span>المدربين / Trainers</span>
+                    </a>
+                </li>
                 <li>
                     <a href="#" id="logoutBtn">
                         <i class="fas fa-sign-out-alt"></i>
@@ -401,6 +407,21 @@
 
                 <div id="workoutsGrid" class="clients-grid">
                     <!-- Workouts will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Trainers View -->
+            <div id="trainersView" style="display: none;">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-lg);">
+                    <h1>إدارة المدربين / Trainers Management</h1>
+                    <button class="btn btn-primary" id="addTrainerBtn">
+                        <i class="fas fa-plus"></i> إضافة مدرب / Add Trainer
+                    </button>
+                </div>
+
+                <div id="trainersGrid" class="clients-grid">
+                    <!-- Trainers will be loaded here -->
                 </div>
             </div>
         </main>
@@ -567,6 +588,152 @@
         </div>
     </div>
 
+    <!-- Edit Client Modal -->
+    <div id="editClientModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>تعديل بيانات المتدرب / Edit Client</h2>
+                <button class="close-modal" onclick="closeEditClientModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editClientForm">
+                    <input type="hidden" id="editClientId">
+
+                    <div class="form-group">
+                        <label class="form-label">الاسم / Name</label>
+                        <input type="text" id="editClientName" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">البريد الإلكتروني / Email</label>
+                        <input type="email" id="editClientEmail" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">رقم الهاتف / Phone</label>
+                        <input type="tel" id="editClientPhone" class="form-input">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">الباقة / Package</label>
+                        <select id="editClientPackage" class="form-select">
+                            <option value="basic">Basic</option>
+                            <option value="standard">Standard</option>
+                            <option value="premium">Premium</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-save"></i> حفظ التعديلات / Save Changes
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Workout Modal -->
+    <div id="editWorkoutModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>تعديل التمرين / Edit Workout</h2>
+                <button class="close-modal" onclick="closeEditWorkoutModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editWorkoutForm">
+                    <input type="hidden" id="editWorkoutId">
+
+                    <div class="form-group">
+                        <label class="form-label">العنوان بالعربي / Arabic Title</label>
+                        <input type="text" id="editWorkoutTitleAr" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">English Title</label>
+                        <input type="text" id="editWorkoutTitleEn" class="form-input" required>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);">
+                        <div class="form-group">
+                            <label class="form-label">المستوى / Difficulty</label>
+                            <select id="editWorkoutDifficulty" class="form-select">
+                                <option value="beginner">Beginner - مبتدئ</option>
+                                <option value="intermediate">Intermediate - متوسط</option>
+                                <option value="advanced">Advanced - متقدم</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">المدة (دقائق) / Duration (min)</label>
+                            <input type="number" id="editWorkoutDuration" class="form-input" required min="5">
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: var(--space-lg); margin-bottom: var(--space-md);">التمارين / Exercises</h3>
+                    <div id="editExercisesContainer">
+                        <!-- Exercises will be loaded here -->
+                    </div>
+
+                    <button type="button" class="btn btn-secondary" onclick="addEditExerciseField()"
+                        style="margin-bottom: var(--space-lg);">
+                        <i class="fas fa-plus"></i> إضافة تمرين / Add Exercise
+                    </button>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-save"></i> حفظ التعديلات / Save Changes
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Trainer Modal -->
+    <div id="addTrainerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>إضافة مدرب جديد / Add New Trainer</h2>
+                <button class="close-modal" onclick="closeAddTrainerModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addTrainerForm">
+                    <div class="form-group">
+                        <label class="form-label">الاسم / Name</label>
+                        <input type="text" id="trainerName" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">البريد الإلكتروني / Email</label>
+                        <input type="email" id="trainerEmail" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">كلمة المرور / Password</label>
+                        <input type="password" id="trainerPassword" class="form-input" required minlength="6"
+                            placeholder="6 حروف على الأقل">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">رقم الهاتف / Phone</label>
+                        <input type="tel" id="trainerPhone" class="form-input">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-save"></i> إنشاء حساب المدرب / Create Trainer Account
+                    </button>
+
+                    <p style="margin-top: var(--space-md); font-size: 0.875rem; color: var(--gray-600);">
+                        ⚠️ سيتم إرسال بيانات الدخول للمدرب على بريده الإلكتروني
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
@@ -575,6 +742,7 @@
     <!-- Scripts -->
     <script src="js/firebase-config.js"></script>
     <script src="js/admin-dashboard.js"></script>
+    <script src="js/admin-edit-functions.js"></script>
 </body>
 
 </html>
