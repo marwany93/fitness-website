@@ -373,9 +373,21 @@ function createAssignmentCard(assignment) {
         <strong>ملاحظات / Notes:</strong> ${assignment.trainerNotes}
       </p>
     ` : ''}
+    ${assignment.clientFeedback && assignment.completed ? `
+      <p style="background: linear-gradient(135deg, var(--secondary-green), #16a34a); color: white; padding: var(--space-sm); border-radius: var(--radius-md); margin-bottom: var(--space-sm);">
+        <strong><i class="fas fa-comment-dots"></i> رأي المتدرب / Client Feedback:</strong>
+        <br>
+        "${assignment.clientFeedback}"
+      </p>
+    ` : ''}
     <p style="font-size: 0.875rem; color: var(--gray-600);">
       تاريخ التعيين / Assigned: ${FirebaseHelper.formatDate(assignment.assignedDate)}
     </p>
+    ${assignment.completed && assignment.completedDate ? `
+      <p style="font-size: 0.875rem; color: var(--success);">
+        <i class="fas fa-check"></i> تم الإكمال / Completed: ${FirebaseHelper.formatDate(assignment.completedDate)}
+      </p>
+    ` : ''}
   `;
 
     return card;
