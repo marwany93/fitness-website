@@ -212,6 +212,9 @@ async function openClientModal(client) {
 
     // Load client info
     displayClientInfo(client);
+
+    // Setup assign workout button
+    setupAssignWorkoutButton();
 }
 
 function closeClientModal() {
@@ -376,6 +379,78 @@ function createAssignmentCard(assignment) {
   `;
 
     return card;
+}
+
+// Handle workout assignment
+async function handleAssignWorkout() {
+    if (!currentClientId) {
+        alert('خطأ: لا يوجد متدرب محدد / Error: No client selected');
+        return;
+    }
+
+    // Load available workouts
+    const workoutsResult = await FirebaseHelper.getAllWorkouts();
+
+    if (!workoutsResult.success) {
+        alert('خطأ في تحميل التمارين: ' + workoutsResult.error);
+        return;
+    }
+
+    if (workoutsResult.data.length === 0) {
+        alert('⚠️ لا توجد تمارين متاحة!\n\nيجب إضافة تمرين أولاً في Firebase Console:\n1. Firestore Database → workouts\n2. Add Document\n3. املأ الحقول (title, exercises, duration)\n\nأو اتبع التعليمات في QUICK_START.md');
+        return;
+    }
+
+    // Create workout selection list
+    let workoutsList = 'اختر رقم التمرين / Select workout number:\n\n';
+    workoutsResult.data.forEach((workout, index) => {
+        workoutsList += `${index + 1}. ${workout.title || workout.titleAr} (${workout.difficulty || 'beginner'})\n`;
+    });
+
+    const selection = prompt(workoutsList + '\nأدخل رقم التمرين / Enter workout number:');
+
+    if (!selection) return; // User cancelled
+
+    const workoutIndex = parseInt(selection) - 1;
+
+    if (workoutIndex < 0 || workoutIndex >= workoutsResult.data.length) {
+        alert('رقم غير صحيح! / Invalid number!');
+        return;
+    }
+
+    const selectedWorkout = workoutsResult.data[workoutIndex];
+
+    // Get trainer notes
+    const notes = prompt(`تعيين تمرين: ${selectedWorkout.title}\n\nملاحظات للمتدرب (اختياري) / Trainer notes (optional):`);
+
+    // Assign workout
+    const result = await FirebaseHelper.assignWorkout(
+        currentClientId,
+        selectedWorkout.id,
+        notes || '',
+        null // dueDate - optional
+    );
+
+    if (result.success) {
+        alert('✅ تم تعيين التمرين بنجاح! / Workout assigned successfully!');
+        // Reload assignments
+        loadClientAssignments(currentClientId);
+    } else {
+        alert('خطأ في تعيين التمرين: ' + result.error);
+    }
+}
+
+// Setup assign workout button when client modal opens
+function setupAssignWorkoutButton() {
+    const btn = document.getElementById('assignWorkoutBtn');
+    if (btn) {
+        // Remove old listeners
+        const newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
+
+        // Add new listener
+        newBtn.addEventListener('click', handleAssignWorkout);
+    }
 }
 
 // ===================================
