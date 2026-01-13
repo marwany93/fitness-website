@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitLife - Client Portal</title>
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/bilingual.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .client-portal {
+            min-height: 100vh;
+            background: var(--gray-50);
+        }
+
+        .portal-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
+            color: white;
+            padding: var(--space-xl) 0;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+            margin: var(--space-xl) 0;
+        }
+
+        .workout-card {
+            background: white;
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .exercise-list {
+            list-style: none;
+            margin-top: var(--space-md);
+        }
+
+        .exercise-item {
+            padding: var(--space-sm);
+            background: var(--gray-50);
+            margin-bottom: var(--space-xs);
+            border-radius: var(--radius-md);
+        }
+
+        .complete-btn {
+            margin-top: var(--space-md);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-box">
+            <div style="text-align: center; margin-bottom: var(--space-xl);">
+                <i class="fas fa-user-circle" style="font-size: 3rem; color: var(--primary-blue);"></i>
+                <h1>FitLife</h1>
+                <p style="color: var(--gray-600);">بوابة المتدربين / Client Portal</p>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">البريد الإلكتروني / Email</label>
+                    <input type="email" id="loginEmail" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">كلمة المرور / Password</label>
+                    <input type="password" id="loginPassword" class="form-input" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    تسجيل الدخول / Login
+                </button>
+
+                <div id="loginError"
+                    style="margin-top: var(--space-md); color: var(--error); text-align: center; display: none;"></div>
+            </form>
+
+            <div
+                style="margin-top: var(--space-xl); padding-top: var(--space-md); border-top: 1px solid var(--gray-200); text-align: center;">
+                <a href="index.html" style="color: var(--gray-600); font-size: 0.875rem;">
+                    <i class="fas fa-home"></i> العودة للموقع / Back to website
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Client Portal -->
+    <div id="portalScreen" class="client-portal" style="display: none;">
+        <!-- Header -->
+        <div class="portal-header">
+            <div class="container">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h1 id="clientName">مرحباً / Welcome</h1>
+                        <p id="clientEmail" style="opacity: 0.9;"></p>
+                    </div>
+                    <button class="btn btn-secondary" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> تسجيل خروج / Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="container section">
+            <!-- Tab Navigation -->
+            <div
+                style="display: flex; gap: var(--space-md); border-bottom: 2px solid var(--gray-200); margin-bottom: var(--space-xl);">
+                <button class="tab-btn active"
+                    style="background: transparent; border: none; padding: var(--space-md); font-size: 1rem; font-weight: 600; color: var(--gray-600); border-bottom: 3px solid transparent; cursor: pointer;"
+                    data-tab="workouts">
+                    <i class="fas fa-dumbbell"></i> التمارين / Workouts
+                </button>
+                <button class="tab-btn"
+                    style="background: transparent; border: none; padding: var(--space-md); font-size: 1rem; font-weight: 600; color: var(--gray-600); border-bottom: 3px solid transparent; cursor: pointer;"
+                    data-tab="messages">
+                    <i class="fas fa-comments"></i> الرسائل / Messages
+                </button>
+            </div>
+
+            <!-- Workouts Tab -->
+            <div id="workoutsTab">
+                <h2 style="margin-bottom: var(--space-lg);">تماريني / My Workouts</h2>
+                <div id="workoutsList" class="dashboard-grid">
+                    <!-- Workouts will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Messages Tab -->
+            <div id="messagesTab" style="display: none;">
+                <h2 style="margin-bottom: var(--space-lg);">رسائل المدرب / Trainer Messages</h2>
+
+                <div
+                    style="background: white; border-radius: var(--radius-lg); padding: var(--space-lg); box-shadow: var(--shadow-md);">
+                    <div class="message-thread" id="messageThread"
+                        style="max-height: 500px; overflow-y: auto; margin-bottom: var(--space-lg); padding: var(--space-md); background: var(--gray-50); border-radius: var(--radius-md);">
+                        <!-- Messages will be loaded here -->
+                    </div>
+
+                    <form id="sendMessageForm">
+                        <div class="form-group">
+                            <textarea id="messageInput" class="form-textarea" rows="3"
+                                placeholder="اكتب رسالتك للمدرب... / Message your trainer..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> إرسال / Send
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- Scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/client-portal.js"></script>
+</body>
+
+</html>

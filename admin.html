@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitLife - Admin Dashboard</title>
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/bilingual.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Dashboard specific styles */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+            background: var(--gray-50);
+        }
+
+        .sidebar {
+            background: var(--gray-900);
+            color: white;
+            padding: var(--space-lg);
+        }
+
+        .sidebar-header {
+            margin-bottom: var(--space-xl);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--gray-700);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: var(--space-sm);
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm);
+            color: var(--gray-300);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-base);
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .main-content {
+            padding: var(--space-xl);
+        }
+
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+
+        .client-card {
+            background: white;
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .client-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .client-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .client-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-full);
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-orange));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .client-info h3 {
+            margin: 0 0 var(--space-xs);
+            color: var(--gray-900);
+        }
+
+        .client-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--radius-lg);
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            padding: var(--space-lg);
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-body {
+            padding: var(--space-lg);
+        }
+
+        .close-modal {
+            background: transparent;
+            font-size: 1.5rem;
+            color: var(--gray-500);
+            cursor: pointer;
+        }
+
+        .close-modal:hover {
+            color: var(--gray-900);
+        }
+
+        .message-thread {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: var(--space-md);
+            background: var(--gray-50);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .message {
+            margin-bottom: var(--space-md);
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .message.trainer {
+            flex-direction: row-reverse;
+        }
+
+        .message-bubble {
+            max-width: 70%;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+        }
+
+        .message.trainer .message-bubble {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .message.client .message-bubble {
+            background: white;
+            color: var(--gray-900);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: var(--space-xs);
+        }
+
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
+        }
+
+        .login-box {
+            background: white;
+            padding: var(--space-2xl);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-box">
+            <div style="text-align: center; margin-bottom: var(--space-xl);">
+                <i class="fas fa-dumbbell" style="font-size: 3rem; color: var(--primary-blue);"></i>
+                <h1>FitLife Admin</h1>
+                <p style="color: var(--gray-600);">لوحة تحكم المدرب / Trainer Dashboard</p>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">البريد الإلكتروني / Email</label>
+                    <input type="email" id="loginEmail" class="form-input" required placeholder="trainer@fitlife.com">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">كلمة المرور / Password</label>
+                    <input type="password" id="loginPassword" class="form-input" required placeholder="••••••••">
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    تسجيل الدخول / Login
+                </button>
+
+                <div id="loginError"
+                    style="margin-top: var(--space-md); color: var(--error); text-align: center; display: none;"></div>
+            </form>
+
+            <div
+                style="margin-top: var(--space-xl); padding-top: var(--space-md); border-top: 1px solid var(--gray-200); text-align: center;">
+                <a href="index.html" style="color: var(--gray-600); font-size: 0.875rem;">
+                    <i class="fas fa-home"></i> العودة للموقع / Back to website
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboardScreen" class="dashboard-container" style="display: none;">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-dumbbell"></i> FitLife</h2>
+                <p id="trainerName" style="color: var(--gray-400); font-size: 0.875rem;"></p>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="#" class="active" data-view="clients">
+                        <i class="fas fa-users"></i>
+                        <span>المتدربين / Clients</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-view="workouts">
+                        <i class="fas fa-dumbbell"></i>
+                        <span>التمارين / Workouts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>تسجيل خروج / Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Clients View -->
+            <div id="clientsView">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-lg);">
+                    <h1>قائمة المتدربين / Clients List</h1>
+                    <button class="btn btn-primary" id="addClientBtn">
+                        <i class="fas fa-plus"></i> إضافة متدرب / Add Client
+                    </button>
+                </div>
+
+                <div id="clientsGrid" class="clients-grid">
+                    <!-- Clients will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Workouts View -->
+            <div id="workoutsView" style="display: none;">
+                <h1>مكتبة التمارين / Workout Library</h1>
+                <p>قريباً... / Coming soon...</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Client Detail Modal -->
+    <div id="clientModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalClientName">Client Details</h2>
+                <button class="close-modal" onclick="closeClientModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Tabs -->
+                <div
+                    style="display: flex; gap: var(--space-md); border-bottom: 2px solid var(--gray-200); margin-bottom: var(--space-lg);">
+                    <button class="tab-btn active" data-tab="messages">
+                        <i class="fas fa-comments"></i> الرسائل / Messages
+                    </button>
+                    <button class="tab-btn" data-tab="workouts">
+                        <i class="fas fa-dumbbell"></i> التمارين / Workouts
+                    </button>
+                    <button class="tab-btn" data-tab="info">
+                        <i class="fas fa-user"></i> المعلومات / Info
+                    </button>
+                </div>
+
+                <!-- Messages Tab -->
+                <div id="messagesTab" class="tab-content">
+                    <div class="message-thread" id="messageThread">
+                        <!-- Messages will be loaded here -->
+                    </div>
+
+                    <form id="sendMessageForm">
+                        <div class="form-group">
+                            <textarea id="messageInput" class="form-textarea" rows="3"
+                                placeholder="اكتب رسالتك هنا... / Type your message..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> إرسال / Send
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Workouts Tab -->
+                <div id="workoutsTab" class="tab-content" style="display: none;">
+                    <button class="btn btn-primary mb-md" id="assignWorkoutBtn">
+                        <i class="fas fa-plus"></i> تعيين تمرين / Assign Workout
+                    </button>
+
+                    <div id="clientWorkouts">
+                        <!-- Client workouts will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Info Tab -->
+                <div id="infoTab" class="tab-content" style="display: none;">
+                    <div id="clientInfo">
+                        <!-- Client info will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Client Modal -->
+    <div id="addClientModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>إضافة متدرب جديد / Add New Client</h2>
+                <button class="close-modal" onclick="closeAddClientModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addClientForm">
+                    <div class="form-group">
+                        <label class="form-label">الاسم / Name</label>
+                        <input type="text" id="clientName" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">البريد الإلكتروني / Email</label>
+                        <input type="email" id="clientEmail" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">رقم الهاتف / Phone</label>
+                        <input type="tel" id="clientPhone" class="form-input">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">الباقة / Package</label>
+                        <select id="clientPackage" class="form-select">
+                            <option value="basic">Basic</option>
+                            <option value="standard">Standard</option>
+                            <option value="premium">Premium</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-save"></i> حفظ / Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- Scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/admin-dashboard.js"></script>
+</body>
+
+</html>
