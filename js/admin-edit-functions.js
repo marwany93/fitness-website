@@ -287,23 +287,52 @@ async function handleAddTrainer(e) {
     const password = document.getElementById('trainerPassword').value;
     const phone = document.getElementById('trainerPhone').value;
 
-    // Note: Creating user accounts requires Firebase Admin SDK or Cloud Functions
-    // For now, just add to Firestore - user needs to be created manually in Firebase Auth
-    const trainerData = {
-        name: name,
-        email: email,
-        phone: phone,
-        role: 'trainer'
-    };
+    // Show loading state
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإنشاء... / Creating...';
+    submitBtn.disabled = true;
 
-    const result = await FirebaseHelper.addUser(trainerData);
+    try {
+        // Call Cloud Function to create trainer
+        const createTrainer = firebase.functions().httpsCallable('createTrainer');
 
-    if (result.success) {
-        alert(`✅ تم إنشاء حساب المدرب بنجاح!\n\n⚠️ مهم: يجب إنشاء حساب المدرب يدوياً في Firebase Authentication:\n\nEmail: ${email}\nPassword: ${password}\n\nثم ربطه بالـ UID في Firestore`);
-        closeAddTrainerModal();
-        loadTrainers();
-    } else {
-        alert('خطأ في إضافة المدرب: ' + result.error);
+        const result = await createTrainer({
+            name: name,
+            email: email,
+            password: password,
+            phone: phone
+        });
+
+        if (result.data.success) {
+            alert(`✅ ${result.data.message}\n\nUID: ${result.data.uid}\n\nيمكن للمدرب تسجيل الدخول الآن بـ:\nEmail: ${email}\nPassword: ${password}\n\n⚠️ يُفضل إرسال بيانات الدخول للمدرب عبر وسيلة آمنة`);
+            closeAddTrainerModal();
+            loadTrainers();
+        }
+    } catch (error) {
+        console.error('Error calling Cloud Function:', error);
+
+        let errorMessage = 'حدث خطأ أثناء إنشاء الحساب / An error occurred';
+
+        if (error.code === 'functions/unauthenticated') {
+            errorMessage = 'يجب تسجيل الدخول أولاً / Must be authenticated';
+        } else if (error.code === 'functions/permission-denied') {
+            errorMessage = 'فقط الأدمن يمكنه إضافة مدربين / Only admins can create trainers';
+        } else if (error.code === 'functions/already-exists') {
+            errorMessage = 'البريد الإلكتروني مستخدم بالفعل / Email already exists';
+        } else if (error.code === 'functions/invalid-argument') {
+            errorMessage = error.message;
+        } else if (error.code === 'functions/not-found') {
+            errorMessage = '❌ Cloud Function غير متاح!\n\nيجب نشر Cloud Functions أولاً.\nاتبع التعليمات في CLOUD_FUNCTIONS_SETUP.md';
+        } else {
+            errorMessage = error.message || errorMessage;
+        }
+
+        alert('❌ ' + errorMessage);
+    } finally {
+        // Restore button state
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
     }
 }
 
