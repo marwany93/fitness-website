@@ -1,9 +1,9 @@
 // ===================================
-// Client Portal Logic
+// Client Portal Logic - FIXED VERSION
 // ===================================
 
 let currentUser = null;
-let trainerId = 'TRAINER_UID_PLACEHOLDER'; // Will be set from database
+let trainerId = null; // Will be fetched from Firebase
 let messageUnsubscribe = null;
 
 // Initialize on page load
@@ -91,14 +91,11 @@ async function showPortal() {
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('portalScreen').style.display = 'block';
 
-    // Load client data
+    // Load client data and trainer ID
     await loadClientData();
 
     // Load workouts
     await loadWorkouts();
-
-    // Load messages
-    loadMessages();
 }
 
 // ===================================
@@ -111,6 +108,30 @@ async function loadClientData() {
     if (result.success) {
         document.getElementById('clientName').textContent = `مرحباً ${result.data.name} / Welcome ${result.data.name}`;
         document.getElementById('clientEmail').textContent = result.data.email;
+
+        // Fetch trainer ID automatically
+        await fetchTrainerId();
+    }
+}
+
+// Fetch trainer ID from users collection
+async function fetchTrainerId() {
+    try {
+        const db = firebase.firestore();
+        const snapshot = await db.collection('users').where('role', '==', 'trainer').limit(1).get();
+
+        if (!snapshot.empty) {
+            trainerId = snapshot.docs[0].id;
+            console.log('✅ Trainer ID loaded:', trainerId);
+            // Now load messages with correct trainer ID
+            loadMessages();
+        } else {
+            console.error('❌ No trainer found in database');
+            alert('No trainer account found. Please ensure a trainer account exists in Firebase.');
+        }
+    } catch (error) {
+        console.error('Error fetching trainer:', error);
+        alert('Error loading trainer information: ' + error.message);
     }
 }
 
@@ -221,16 +242,18 @@ async function markAsComplete(assignmentId) {
 // ===================================
 
 function loadMessages() {
-    // For now, we'll assume trainer ID is known
-    // In production, you'd fetch this from the client's document
+    if (!trainerId) {
+        console.warn('⚠️ Trainer ID not loaded yet, skipping message load');
+        return;
+    }
 
     // Unsubscribe from previous listener
     if (messageUnsubscribe) {
         messageUnsubscribe();
     }
 
-    // Note: trainerId should be fetched from database
-    // This is a placeholder - in real implementation, get from client document
+    console.log('📱 Loading messages between client and trainer...', currentUser.uid, trainerId);
+
     messageUnsubscribe = FirebaseHelper.listenToMessages(currentUser.uid, trainerId, (messages) => {
         displayMessages(messages);
     });
@@ -283,10 +306,17 @@ function displayMessages(messages) {
 async function handleSendMessage(e) {
     e.preventDefault();
 
+    if (!trainerId) {
+        alert('خطأ: لم يتم تحميل معلومات المدرب / Error: Trainer information not loaded');
+        return;
+    }
+
     const messageInput = document.getElementById('messageInput');
     const message = messageInput.value.trim();
 
     if (!message) return;
+
+    console.log('📤 Sending message to trainer:', trainerId);
 
     const result = await FirebaseHelper.sendMessage(
         currentUser.uid,
@@ -297,8 +327,10 @@ async function handleSendMessage(e) {
 
     if (result.success) {
         messageInput.value = '';
+        console.log('✅ Message sent successfully');
     } else {
         alert('خطأ في إرسال الرسالة: ' + result.error);
+        console.error('❌ Message send failed:', result.error);
     }
 }
 
