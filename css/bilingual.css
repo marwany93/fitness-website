@@ -1,0 +1,121 @@
+/* ===================================
+   Bilingual Support Styles
+   =================================== */
+
+/* Import Arabic fonts from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700&display=swap');
+
+/* Import English fonts from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ===================================
+   RTL (Arabic) Specific Styles
+   =================================== */
+body[dir="rtl"] {
+    text-align: right;
+}
+
+/* RTL Navigation */
+body[dir="rtl"] .navbar {
+    direction: rtl;
+}
+
+body[dir="rtl"] .nav-menu {
+    flex-direction: row-reverse;
+}
+
+body[dir="rtl"] .logo {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+/* RTL Cards */
+body[dir="rtl"] .card {
+    text-align: right;
+}
+
+/* RTL Footer */
+body[dir="rtl"] .footer {
+    text-align: right;
+}
+
+body[dir="rtl"] .social-links {
+    flex-direction: row-reverse;
+}
+
+/* RTL Grid adjustments */
+body[dir="rtl"] .grid {
+    direction: rtl;
+}
+
+/* RTL Form elements */
+body[dir="rtl"] .form-input,
+body[dir="rtl"] .form-textarea,
+body[dir="rtl"] .form-select {
+    text-align: right;
+    direction: rtl;
+}
+
+/* ===================================
+   LTR (English) Specific Styles
+   =================================== */
+body[dir="ltr"] {
+    text-align: left;
+}
+
+body[dir="ltr"] .navbar {
+    direction: ltr;
+}
+
+body[dir="ltr"] .nav-menu {
+    flex-direction: row;
+}
+
+/* ===================================
+   Mobile RTL Adjustments
+   =================================== */
+@media (max-width: 768px) {
+    body[dir="rtl"] .nav-menu {
+        right: -100%;
+        left: auto;
+    }
+
+    body[dir="rtl"] .nav-menu.active {
+        right: 0;
+    }
+}
+
+/* ===================================
+   Language-Specific Typography
+   =================================== */
+/* Arabic text gets slightly larger for readability */
+body[dir="rtl"] {
+    font-size: 1.05rem;
+    letter-spacing: 0.01em;
+}
+
+/* English keeps standard sizing */
+body[dir="ltr"] {
+    font-size: 1rem;
+    letter-spacing: normal;
+}
+
+/* ===================================
+   Accessibility & Print
+   =================================== */
+[lang="ar"] {
+    font-family: var(--font-family-ar);
+}
+
+[lang="en"] {
+    font-family: var(--font-family-en);
+}
+
+/* Ensure proper text direction inheritance */
+[dir="rtl"] * {
+    direction: rtl;
+}
+
+[dir="ltr"] * {
+    direction: ltr;
+}

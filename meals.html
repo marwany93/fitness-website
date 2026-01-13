@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Healthy meal recipes to support your fitness journey">
+    <title>FitLife - Healthy Meals</title>
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/bilingual.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-dumbbell"></i>
+                    FitLife
+                </div>
+
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link" data-i18n="nav.home">الرئيسية</a></li>
+                    <li><a href="packages.html" class="nav-link" data-i18n="nav.packages">الباقات</a></li>
+                    <li><a href="classes.html" class="nav-link" data-i18n="nav.classes">الكلاسز</a></li>
+                    <li><a href="meals.html" class="nav-link active" data-i18n="nav.meals">وجبات صحية</a></li>
+                    <li><a href="science.html" class="nav-link" data-i18n="nav.science">العلم</a></li>
+                </ul>
+
+                <div class="lang-toggle">
+                    <button class="lang-btn" data-lang="ar">ع</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="hero" style="padding: var(--space-2xl) 0;">
+        <div class="container">
+            <div class="hero-content">
+                <h1 data-i18n="meals.title">خطط الوجبات الصحية</h1>
+                <p data-i18n="meals.subtitle">وصفات لذيذة ومغذية لرحلتك الرياضية</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meals Grid -->
+    <section class="section">
+        <div class="container">
+            <div class="grid grid-3">
+                <!-- Meal 1 -->
+                <div class="card">
+                    <div
+                        style="position: relative; background: linear-gradient(135deg, #84cc16, #a3e635); height: 200px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-md);">
+                        <i class="fas fa-utensils" style="font-size: 4rem; color: white; opacity: 0.5;"></i>
+                    </div>
+
+                    <h3 class="card-title">Grilled Chicken with Quinoa</h3>
+                    <div
+                        style="display: flex; gap: var(--space-md); margin-bottom: var(--space-md); font-size: 0.875rem; color: var(--gray-600);">
+                        <span><i class="fas fa-clock"></i> 30 دقيقة</span>
+                        <span><i class="fas fa-fire"></i> 450 سعر</span>
+                        <span><i class="fas fa-drumstick-bite"></i> 35g بروتين</span>
+                    </div>
+                    <p class="card-text">دجاج مشوي مع الكينوا والخضار - وجبة متوازنة غنية بالبروتين</p>
+                    <a href="#" class="btn btn-outline" data-i18n="meals.viewRecipe">عرض الوصفة</a>
+                </div>
+
+                <!-- Meal 2 -->
+                <div class="card">
+                    <div
+                        style="position: relative; background: linear-gradient(135deg, #f97316, #fb923c); height: 200px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-md);">
+                        <i class="fas fa-fish" style="font-size: 4rem; color: white; opacity: 0.5;"></i>
+                    </div>
+
+                    <h3 class="card-title">Salmon & Sweet Potato</h3>
+                    <div
+                        style="display: flex; gap: var(--space-md); margin-bottom: var(--space-md); font-size: 0.875rem; color: var(--gray-600);">
+                        <span><i class="fas fa-clock"></i> 25 دقيقة</span>
+                        <span><i class="fas fa-fire"></i> 520 سعر</span>
+                        <span><i class="fas fa-drumstick-bite"></i> 40g بروتين</span>
+                    </div>
+                    <p class="card-text">سلمون مع البطاطا الحلوة - غني بأوميغا 3 والفيتامينات</p>
+                    <a href="#" class="btn btn-outline" data-i18n="meals.viewRecipe">عرض الوصفة</a>
+                </div>
+
+                <!-- Meal 3 -->
+                <div class="card">
+                    <div
+                        style="position: relative; background: linear-gradient(135deg, #06b6d4, #22d3ee); height: 200px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-md);">
+                        <i class="fas fa-leaf" style="font-size: 4rem; color: white; opacity: 0.5;"></i>
+                    </div>
+
+                    <h3 class="card-title">Greek Salad with Feta</h3>
+                    <div
+                        style="display: flex; gap: var(--space-md); margin-bottom: var(--space-md); font-size: 0.875rem; color: var(--gray-600);">
+                        <span><i class="fas fa-clock"></i> 15 دقيقة</span>
+                        <span><i class="fas fa-fire"></i> 280 سعر</span>
+                        <span><i class="fas fa-drumstick-bite"></i> 12g بروتين</span>
+                    </div>
+                    <p class="card-text">سلطة يونانية طازجة مع جبنة الفيتا - خفيفة ومغذية</p>
+                    <a href="#" class="btn btn-outline" data-i18n="meals.viewRecipe">عرض الوصفة</a>
+                </div>
+
+                <!-- Meal 4 -->
+                <div class="card">
+                    <div
+                        style="position: relative; background: linear-gradient(135deg, #dc2626, #f87171); height: 200px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-md);">
+                        <i class="fas fa-egg" style="font-size: 4rem; color: white; opacity: 0.5;"></i>
+                    </div>
+
+                    <h3 class="card-title">Protein Omelette</h3>
+                    <div
+                        style="display: flex; gap: var(--space-md); margin-bottom: var(--space-md); font-size: 0.875rem; color: var(--gray-600);">
+                        <span><i class="fas fa-clock"></i> 10 دقائق</span>
+                        <span><i class="fas fa-fire"></i> 320 سعر</span>
+                        <span><i class="fas fa-drumstick-bite"></i> 28g بروتين</span>
+                    </div>
+                    <p class="card-text">أومليت البيض الغني بالبروتين - مثالي للإفطار</p>
+                    <a href="#" class="btn btn-outline" data-i18n="meals.viewRecipe">عرض الوصفة</a>
+                </div>
+
+                <!-- Meal 5 -->
+                <div class="card">
+                    <div
+                        style="position: relative; background: linear-gradient(135deg, #7c3aed, #a78bfa); height: 200px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-md);">
+                        <i class="fas fa-seedling" style="font-size: 4rem; color: white; opacity: 0.5;"></i>
+                    </div>
+
+                    <h3 class="card-title">Lentil & Vegetable Soup</h3>
+                    <div
+                        style="display: flex; gap: var(--space-md); margin-bottom: var(--space-md); font-size: 0.875rem; color: var(--gray-600);">
+                        <span><i class="fas fa-clock"></i> 35 دقيقة</span>
+                        <span><i class="fas fa-fire"></i> 290 سعر</span>
+                        <span><i class="fas fa-drumstick-bite"></i> 18g بروتين</span>
+                    </div>
+                    <p class="card-text">شوربة العدس والخضار - غنية بالألياف والبروتين النباتي</p>
+                    <a href="#" class="btn btn-outline" data-i18n="meals.viewRecipe">عرض الوصفة</a>
+                </div>
+
+                <!-- Meal 6 -->
+                <div class="card">
+                    <div
+                        style="position: relative; background: linear-gradient(135deg, #d946ef, #f0abfc); height: 200px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-md);">
+                        <i class="fas fa-apple-alt" style="font-size: 4rem; color: white; opacity: 0.5;"></i>
+                    </div>
+
+                    <h3 class="card-title">Berry Protein Smoothie</h3>
+                    <div
+                        style="display: flex; gap: var(--space-md); margin-bottom: var(--space-md); font-size: 0.875rem; color: var(--gray-600);">
+                        <span><i class="fas fa-clock"></i> 5 دقائق</span>
+                        <span><i class="fas fa-fire"></i> 250 سعر</span>
+                        <span><i class="fas fa-drumstick-bite"></i> 25g بروتين</span>
+                    </div>
+                    <p class="card-text">سموثي التوت بالبروتين - منعش ومغذي بعد التمرين</p>
+                    <a href="#" class="btn btn-outline" data-i18n="meals.viewRecipe">عرض الوصفة</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meal Categories -->
+    <section class="section" style="background: var(--gray-50);">
+        <div class="container">
+            <h2 class="section-title">تصنيفات الوجبات / Meal Categories</h2>
+            <div class="grid grid-4">
+                <div class="card text-center">
+                    <div
+                        style="width: 80px; height: 80px; margin: 0 auto var(--space-md); background: linear-gradient(135deg, #f97316, #fb923c); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-sunrise" style="font-size: 2rem; color: white;"></i>
+                    </div>
+                    <h3 class="card-title">إفطار / Breakfast</h3>
+                    <p class="card-text">وجبات صباحية لبداية نشطة</p>
+                </div>
+
+                <div class="card text-center">
+                    <div
+                        style="width: 80px; height: 80px; margin: 0 auto var(--space-md); background: linear-gradient(135deg, #3b82f6, #60a5fa); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-sun" style="font-size: 2rem; color: white;"></i>
+                    </div>
+                    <h3 class="card-title">غداء / Lunch</h3>
+                    <p class="card-text">وجبات متوازنة للطاقة</p>
+                </div>
+
+                <div class="card text-center">
+                    <div
+                        style="width: 80px; height: 80px; margin: 0 auto var(--space-md); background: linear-gradient(135deg, #7c3aed, #a78bfa); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-moon" style="font-size: 2rem; color: white;"></i>
+                    </div>
+                    <h3 class="card-title">عشاء / Dinner</h3>
+                    <p class="card-text">وجبات خفيفة ومغذية</p>
+                </div>
+
+                <div class="card text-center">
+                    <div
+                        style="width: 80px; height: 80px; margin: 0 auto var(--space-md); background: linear-gradient(135deg, #10b981, #34d399); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-cookie-bite" style="font-size: 2rem; color: white;"></i>
+                    </div>
+                    <h3 class="card-title">وجبات خفيفة / Snacks</h3>
+                    <p class="card-text">خيارات صحية بين الوجبات</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-i18n="footer.contactTitle">تواصل معنا</h3>
+                    <div class="social-links">
+                        <a href="https://wa.me/1234567890" class="social-link" target="_blank" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://facebook.com" class="social-link" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="tel:+1234567890" class="social-link" aria-label="Phone">
+                            <i class="fas fa-phone"></i>
+                        </a>
+                        <a href="mailto:info@fitlife.com" class="social-link" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3 data-i18n="footer.quickLinks">روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html" data-i18n="nav.home">الرئيسية</a></li>
+                        <li><a href="packages.html" data-i18n="nav.packages">الباقات</a></li>
+                        <li><a href="classes.html" data-i18n="nav.classes">الكلاسز</a></li>
+                        <li><a href="meals.html" data-i18n="nav.meals">وجبات صحية</a></li>
+                        <li><a href="science.html" data-i18n="nav.science">العلم</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 data-i18n="footer.complaintsTitle">شكاوى ومقترحات</h3>
+                    <p style="margin-bottom: var(--space-md); color: var(--gray-400);"
+                        data-i18n="footer.complaintsText">
+                        نحن نقدر ملاحظاتكم
+                    </p>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-input" placeholder="اسمك"
+                                data-i18n="contact.namePlaceholder" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-input" placeholder="بريدك الإلكتروني"
+                                data-i18n="contact.emailPlaceholder" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" class="form-textarea" rows="3" placeholder="رسالتك"
+                                data-i18n="contact.messagePlaceholder" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;"
+                            data-i18n="contact.submit">إرسال</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">© ٢٠٢٦ فِت لايف. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/bilingual.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

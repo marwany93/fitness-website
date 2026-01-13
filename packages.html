@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Choose the perfect subscription package for your fitness journey">
+    <title>FitLife - Subscription Packages</title>
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/bilingual.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-dumbbell"></i>
+                    FitLife
+                </div>
+
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link" data-i18n="nav.home">الرئيسية</a></li>
+                    <li><a href="packages.html" class="nav-link active" data-i18n="nav.packages">الباقات</a></li>
+                    <li><a href="classes.html" class="nav-link" data-i18n="nav.classes">الكلاسز</a></li>
+                    <li><a href="meals.html" class="nav-link" data-i18n="nav.meals">وجبات صحية</a></li>
+                    <li><a href="science.html" class="nav-link" data-i18n="nav.science">العلم</a></li>
+                </ul>
+
+                <div class="lang-toggle">
+                    <button class="lang-btn" data-lang="ar">ع</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="hero" style="padding: var(--space-2xl) 0;">
+        <div class="container">
+            <div class="hero-content">
+                <h1 data-i18n="packages.title">باقات الاشتراك</h1>
+                <p data-i18n="packages.subtitle">اختر الخطة الأنسب لك</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section class="section">
+        <div class="container">
+            <!-- Payment Methods Info -->
+            <div
+                style="text-align: center; margin-bottom: var(--space-xl); padding: var(--space-lg); background: var(--gray-100); border-radius: var(--radius-lg);">
+                <h3 style="margin-bottom: var(--space-md); color: var(--gray-800);">
+                    <i class="fas fa-credit-card"></i>
+                    طرق الدفع المتاحة / Available Payment Methods
+                </h3>
+                <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+                    <div
+                        style="display: flex; align-items: center; gap: var(--space-xs); padding: var(--space-sm) var(--space-md); background: white; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+                        <i class="fas fa-mobile-alt" style="color: var(--accent-orange);"></i>
+                        <span>InstaPay</span>
+                    </div>
+                    <div
+                        style="display: flex; align-items: center; gap: var(--space-xs); padding: var(--space-sm) var(--space-md); background: white; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+                        <i class="fas fa-phone" style="color: var(--error);"></i>
+                        <span>Vodafone Cash</span>
+                    </div>
+                    <div
+                        style="display: flex; align-items: center; gap: var(--space-xs); padding: var(--space-sm) var(--space-md); background: white; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+                        <i class="fab fa-whatsapp" style="color: var(--success);"></i>
+                        <span>WhatsApp</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monthly Packages -->
+            <h2 class="section-title" data-i18n="packages.monthly">شهري</h2>
+            <div class="grid grid-3 mb-xl">
+                <!-- Basic Monthly -->
+                <div class="card text-center">
+                    <div
+                        style="background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; padding: var(--space-lg); border-radius: var(--radius-lg) var(--radius-lg) 0 0; margin: calc(-1 * var(--space-lg)) calc(-1 * var(--space-lg)) var(--space-lg);">
+                        <h3 style="color: white; margin-bottom: var(--space-sm);">Basic</h3>
+                        <div style="font-size: 3rem; font-weight: 800;">
+                            500 <span style="font-size: 1.25rem;">ج.م</span>
+                        </div>
+                        <p style="opacity: 0.9; margin-bottom: 0;">شهرياً / Monthly</p>
+                    </div>
+
+                    <div style="text-align: right; padding: 0 var(--space-md);">
+                        <p style="font-weight: 700; margin-bottom: var(--space-md); color: var(--gray-800);"
+                            data-i18n="packages.features">تشمل الباقة:</p>
+                        <ul style="list-style: none; margin-bottom: var(--space-lg);">
+                            <li
+                                style="padding: var(--space-xs) 0; display: flex; align-items: start; gap: var(--space-sm);">
+                                <i class="fas fa-check-circle"
+                                    style="color: var(--success); margin-top: 4px; flex-shrink: 0;"></i>
+                                <span>برامج تدريبية أساسية / Basic training programs</span>
+                            </li>
+                            <li
+                                style="padding: var(--space-xs) 0; display: flex; align-items: start; gap: var(--space-sm);">
+                                <i class="fas fa-check-circle"
+                                    style="color: var(--success); margin-top: 4px; flex-shrink: 0;"></i>
+                                <span>مكتبة وصفات صحية / Healthy recipes library</span>
+                            </li>
+                            <li
+                                style="padding: var(--space-xs) 0; display: flex; align-items: start; gap: var(--space-sm);">
+                                <i class="fas fa-check-circle"
+                                    style="color: var(--success); margin-top: 4px; flex-shrink: 0;"></i>
+                                <span>دعم عبر الرسائل / Message support</span>
+                            </li>
+                            <li
+                                style="padding: var(--space-xs) 0; display: flex; align-items: start; gap: var(--space-sm);">
+                                <i class="fas fa-check-circle"
+                                    style="color: var(--success); margin-top: 4px; flex-shrink: 0;"></i>
+                                <span>محتوى تعليمي / Educational content</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <a href="https://wa.me/1234567890?text=أرغب%20في%20الاشتراك%20في%20باقة%20Basic"
+                        class="btn btn-primary" target="_blank" data-i18n="packages.subscribe">
+                        اشترك الآن
+                    </a>
+                </div>
+
+                <!-- Standard Monthly -->
+                <div class="card text-center">
+                    <div
+                        style="background: linear-gradient(135deg, #15803d, #22c55e); color: white; padding: var(--space-lg); border-radius: var(--radius-lg) var(--radius-lg) 0 0; margin: calc(-1 * var(--space-lg)) calc(-1 * var(--space-lg)) var(--space-lg);">
+                        <h3 style="color: white; margin-bottom: var(--space-sm);">Standard</h3>
+                        <div style="font-size: 3rem; font-weight: 800;">
+                            800 <span style="font-size: 1.25rem;">ج.م</span>
+                        </div>
+                        <p style="opacity: 0.9; margin-bottom: 0;">شهرياً / Monthly</p>
+                    </div>
+
+                    <div style="text-align: right; padding: 0 var(--space-md);">
+                        <p style="font-weight: 700; margin-bottom: var(--space-md); color: var(--gray-800);"
+                            data-i18n="packages.features">تشمل الباقة:</p>
+                        <ul style="list-style: none; margin-bottom: var(--space-lg);">
+                            <li
+                                style="padding: var(--space-xs) 0; display: flex; align-items: start; gap: var(--space-sm);">
+                                <i class="fas fa-check-circle"
+                                    style="color: var(--success); margin-top: 4px; flex-shrink: 0;"></i>
+                                <span>كل مميزات Basic / All Basic features</span>
+                            </li>
+                            <li
+                                style="padding: var(--space-xs) 0; display: flex; align-items: start; gap: var(--space-sm);">
+                                <i class="fas fa-check-circle"
+                                    style="color: var(--success); margin-top: 4px; flex-shrink: 0;"></i>
+                                <span>خطط تدريب مخصصة / Custom plans</span>
+                            </li>
+                            <li
+                                style="padding: var(--space-xs) 0; display: flex; align-items: start; gap: var(--space-sm);">
+                                <i class="fas fa-check-circle"
+                                    style="color: var(--success); margin-top: 4px; flex-shrink: 0;"></i>
+                                <span>متابعة أسبوعية / Weekly follow-up</span>
+                            </li>
+                            <li
+                                style="padding: var(--space-xs) 0; display: flex; align-items: start; gap: var(--space-sm);">
+                                <i class="fas fa-check-circle"
+                                    style="color: var(--success); margin-top: 4px; flex-shrink: 0;"></i>
+                                <span>كلاسز مباشرة (٢ في الأسبوع) / Live classes</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <a href="https://wa.me/1234567890?text=أرغب%20في%20الاشتراك%20في%20باقة%20Standard"
+                        class="btn btn-primary" target="_blank" data-i18n="packages.subscribe">
+                        اشترك الآن
+                    </a>
+                </div>
+
+                <!-- Premium Monthly - Popular -->
+                <div class="card text-center" style="border: 3px solid var(--accent-orange); position: relative;">
+                    <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--accent-orange); color: white; padding: var(--space-xs) var(--space-md); border-radius: var(--radius-full); font-weight: 700; font-size: 0.875rem;"
+                        data-i18n="packages.popular">
+                        الأكثر شعبية
+                    </div>
+
+                    <div
+                        style="background: linear-gradient(135deg, #ea580c, #f97316); color: white; padding: var(--space-lg); border-radius: var(--radius-lg) var(--radius-lg) 0 0; margin: calc(-1 * var(--space-lg)) calc(-1 * var(--space-lg)) var(--space-lg);">
+                        <h3 style="color: white; margin-bottom: var(--space-sm); margin-top: var(--space-sm);">Premium
+                        </h3>
+                        <div style="font-size: 3rem; font-weight: 800;">
+                            1200 <span style="font-size: 1.25rem;">ج.م</span>
+                        </div>
+                        <p style="opacity: 0.9; margin-bottom: 0;">شهرياً / Monthly</p>
+                    </div>
+
+                    <div style="text-align: right; padding: 0 var(--space-md);">
+                        <p style="font-weight: 700; margin-bottom: var(--space-md); color: var(--gray-800);"
+                            data-i18n="packages.features">تشمل الباقة:</p>
+                        <ul style="list-style: none; margin-bottom: var(--space-lg);">
+                            <li
+                                style="padding: var(--space-xs) 0; display: flex; align-items: start; gap: var(--space-sm);">
+                                <i class="fas fa-check-circle"
+                                    style="color: var(--success); margin-top: 4px; flex-shrink: 0;"></i>
+                                <span>كل مميزات Standard / All Standard features</span>
+                            </li>
+                            <li
+                                style="padding: var(--space-xs) 0; display: flex; align-items: start; gap: var(--space-sm);">
+                                <i class="fas fa-check-circle"
+                                    style="color: var(--success); margin-top: 4px; flex-shrink: 0;"></i>
+                                <span>مدرب شخصي مخصص / Personal trainer</span>
+                            </li>
+                            <li
+                                style="padding: var(--space-xs) 0; display: flex; align-items: start; gap: var(--space-sm);">
+                                <i class="fas fa-check-circle"
+                                    style="color: var(--success); margin-top: 4px; flex-shrink: 0;"></i>
+                                <span>استشارات تغذية أسبوعية / Weekly nutrition</span>
+                            </li>
+                            <li
+                                style="padding: var(--space-xs) 0; display: flex; align-items: start; gap: var(--space-sm);">
+                                <i class="fas fa-check-circle"
+                                    style="color: var(--success); margin-top: 4px; flex-shrink: 0;"></i>
+                                <span>كلاسز مباشرة غير محدودة / Unlimited classes</span>
+                            </li>
+                            <li
+                                style="padding: var(--space-xs) 0; display: flex; align-items: start; gap: var(--space-sm);">
+                                <i class="fas fa-check-circle"
+                                    style="color: var(--success); margin-top: 4px; flex-shrink: 0;"></i>
+                                <span>أولوية في الدعم / Priority support</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <a href="https://wa.me/1234567890?text=أرغب%20في%20الاشتراك%20في%20باقة%20Premium"
+                        class="btn btn-primary pulse" target="_blank" data-i18n="packages.subscribe">
+                        اشترك الآن
+                    </a>
+                </div>
+            </div>
+
+            <!-- Special Offers -->
+            <h2 class="section-title">عروض خاصة / Special Offers</h2>
+            <div class="grid grid-2">
+                <!-- 3 Months Package -->
+                <div class="card"
+                    style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 2px solid var(--secondary-green);">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--space-md);">
+                        <div>
+                            <h3 style="color: var(--secondary-green); margin-bottom: var(--space-xs);">Premium - 3
+                                Months</h3>
+                            <p style="color: var(--gray-600);">وفر ٢٠٪ / Save 20%</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2.5rem; font-weight: 800; color: var(--secondary-green);">
+                                3000 <span style="font-size: 1rem;">ج.م</span>
+                            </div>
+                            <p style="font-size: 0.875rem; color: var(--gray-600); text-decoration: line-through;">٣٦٠٠
+                                ج.م</p>
+                        </div>
+                    </div>
+                    <p style="margin-bottom: var(--space-md);">كل مميزات Premium لمدة ٣ شهور بسعر مخفض</p>
+                    <a href="https://wa.me/1234567890?text=أرغب%20في%20الاشتراك%20في%20عرض%203%20شهور"
+                        class="btn btn-outline" target="_blank" data-i18n="packages.subscribe">
+                        اشترك الآن
+                    </a>
+                </div>
+
+                <!-- Annual Package -->
+                <div class="card"
+                    style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px solid var(--warning);">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--space-md);">
+                        <div>
+                            <h3 style="color: var(--warning); margin-bottom: var(--space-xs);">Premium - Annual</h3>
+                            <p style="color: var(--gray-600);">وفر ٣٥٪ / Save 35%</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2.5rem; font-weight: 800; color: var(--warning);">
+                                9500 <span style="font-size: 1rem;">ج.م</span>
+                            </div>
+                            <p style="font-size: 0.875rem; color: var(--gray-600); text-decoration: line-through;">١٤٤٠٠
+                                ج.م</p>
+                        </div>
+                    </div>
+                    <p style="margin-bottom: var(--space-md);">باقة سنوية كاملة بأفضل سعر - التزم بصحتك لمدة عام</p>
+                    <a href="https://wa.me/1234567890?text=أرغب%20في%20الاشتراك%20في%20العرض%20السنوي"
+                        class="btn btn-outline" target="_blank" data-i18n="packages.subscribe">
+                        اشترك الآن
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-i18n="footer.contactTitle">تواصل معنا</h3>
+                    <div class="social-links">
+                        <a href="https://wa.me/1234567890" class="social-link" target="_blank" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://facebook.com" class="social-link" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="tel:+1234567890" class="social-link" aria-label="Phone">
+                            <i class="fas fa-phone"></i>
+                        </a>
+                        <a href="mailto:info@fitlife.com" class="social-link" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3 data-i18n="footer.quickLinks">روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html" data-i18n="nav.home">الرئيسية</a></li>
+                        <li><a href="packages.html" data-i18n="nav.packages">الباقات</a></li>
+                        <li><a href="classes.html" data-i18n="nav.classes">الكلاسز</a></li>
+                        <li><a href="meals.html" data-i18n="nav.meals">وجبات صحية</a></li>
+                        <li><a href="science.html" data-i18n="nav.science">العلم</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 data-i18n="footer.complaintsTitle">شكاوى ومقترحات</h3>
+                    <p style="margin-bottom: var(--space-md); color: var(--gray-400);"
+                        data-i18n="footer.complaintsText">
+                        نحن نقدر ملاحظاتكم
+                    </p>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-input" placeholder="اسمك"
+                                data-i18n="contact.namePlaceholder" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-input" placeholder="بريدك الإلكتروني"
+                                data-i18n="contact.emailPlaceholder" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" class="form-textarea" rows="3" placeholder="رسالتك"
+                                data-i18n="contact.messagePlaceholder" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;"
+                            data-i18n="contact.submit">إرسال</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">© ٢٠٢٦ فِت لايف. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/bilingual.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
